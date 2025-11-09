@@ -6,32 +6,32 @@ local M = {}
 M.config = {
   -- Level component config
   level = {
-    prefix = 'Lv.',    -- Text prefix before level number
+    prefix = 'Lv.', -- Text prefix before level number
     show_level = true, -- Show level number
-    show_bar = true,   -- Show progress bar
+    show_bar = true, -- Show progress bar
     show_percent = false, -- Show percentage
-    show_xp = false,   -- Show XP numbers (current/needed)
-    bar_length = 6,    -- Length of progress bar
+    show_xp = false, -- Show XP numbers (current/needed)
+    bar_length = 6, -- Length of progress bar
     bar_chars = { filled = '█', empty = '░' }, -- Bar characters
   },
 
   -- Achievements component config
   achievements = {
-    icon = '',       -- Nerd Font trophy icon
+    icon = '', -- Nerd Font trophy icon
     show_count = true, -- Show unlocked/total count
   },
 
   -- Streak component config
   streak = {
-    icon = '',       -- Nerd Font flame icon
+    icon = '', -- Nerd Font flame icon
     show_days = true, -- Show number of days
   },
 
   -- Session time component config
   session_time = {
-    icon = '',       -- Nerd Font clock icon
+    icon = '', -- Nerd Font clock icon
     show_duration = true, -- Show time duration
-    format = 'short',     -- 'short' (2h 34m) or 'long' (2:34:12)
+    format = 'short', -- 'short' (2h 34m) or 'long' (2:34:12)
   },
 }
 
@@ -62,13 +62,13 @@ end
 ---@return string bar
 local function create_progress_bar(current, max, length, chars)
   if max == 0 then
-    return string.rep(chars.empty, length)
+    return chars.empty:rep(length)
   end
 
   local filled = math.floor((current / max) * length)
   filled = math.min(filled, length) -- Clamp to bar length
 
-  local bar = string.rep(chars.filled, filled) .. string.rep(chars.empty, length - filled)
+  local bar = chars.filled:rep(filled) .. chars.empty:rep(length - filled)
   return bar
 end
 
@@ -78,7 +78,7 @@ end
 ---@return string formatted
 local function format_time(seconds, format)
   if seconds < 60 then
-    return format == 'short' and string.format('%ds', seconds) or string.format('0:00:%02d', seconds)
+    return (format == 'short' and '%ds' or '0:00:%02d'):format(seconds)
   end
 
   local hours = math.floor(seconds / 3600)
@@ -87,13 +87,13 @@ local function format_time(seconds, format)
 
   if format == 'short' then
     if hours > 0 then
-      return string.format('%dh %dm', hours, minutes)
-    else
-      return string.format('%dm', minutes)
+      return ('%dh %dm'):format(hours, minutes)
     end
-  else
-    return string.format('%d:%02d:%02d', hours, minutes, secs)
+
+    return ('%dm'):format(minutes)
   end
+
+  return ('%d:%02d:%02d'):format(hours, minutes, secs)
 end
 
 ---Level component - Shows level and XP progress
@@ -134,12 +134,12 @@ function M.level(opts)
   -- Percentage
   if config.show_percent then
     local percent = math.floor((xp_progress / xp_needed) * 100)
-    table.insert(parts, string.format('%d%%', percent))
+    table.insert(parts, ('%d%%'):format(percent))
   end
 
   -- XP numbers
   if config.show_xp then
-    table.insert(parts, string.format('%d/%d', xp_progress, xp_needed))
+    table.insert(parts, ('%d/%d'):format(xp_progress, xp_needed))
   end
 
   return table.concat(parts, ' ')
@@ -162,7 +162,7 @@ function M.achievements(opts)
   local total = #all_achievements
   local unlocked = 0
 
-  for id, _ in pairs(stats.achievements or {}) do
+  for _, _ in ipairs(stats.achievements or {}) do
     unlocked = unlocked + 1
   end
 
@@ -174,7 +174,7 @@ function M.achievements(opts)
   end
 
   if config.show_count then
-    table.insert(parts, string.format('%d/%d', unlocked, total))
+    table.insert(parts, ('%d/%d'):format(unlocked, total))
   end
 
   return table.concat(parts, ' ')
@@ -252,10 +252,18 @@ function M.components(opts)
   M.setup(opts)
 
   return {
-    level = function() return M.level() end,
-    achievements = function() return M.achievements() end,
-    streak = function() return M.streak() end,
-    session_time = function() return M.session_time() end,
+    level = function()
+      return M.level()
+    end,
+    achievements = function()
+      return M.achievements()
+    end,
+    streak = function()
+      return M.streak()
+    end,
+    session_time = function()
+      return M.session_time()
+    end,
   }
 end
 

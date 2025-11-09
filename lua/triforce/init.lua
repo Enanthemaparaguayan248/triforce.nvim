@@ -13,21 +13,40 @@
 ---@field line number XP gained per new line (default: 1)
 ---@field save number XP gained per file save (default: 50)
 
----@class TriforceConfig
----@field enabled boolean Enable the plugin
----@field gamification_enabled boolean Enable gamification features (stats, XP, achievements)
----@field notifications table Notification configuration
----@field notifications.enabled boolean Show level up and achievement notifications
----@field notifications.level_up boolean Show level up notifications
----@field notifications.achievements boolean Show achievement unlock notifications
----@field auto_save_interval number Auto-save stats interval in seconds (default: 300)
----@field keymap table|nil Keymap configuration
----@field keymap.show_profile string|nil Keymap for showing profile (default: nil = no keymap)
----@field custom_languages table<string, table>|nil Custom language definitions { filetype = { icon = "", name = "" } }
----@field level_progression LevelProgression|nil Custom level progression tiers
----@field xp_rewards XPRewards|nil Custom XP reward amounts for different actions
+---@class TriforceLanguage
+---@field name string
+---@field icon string
 
+---@class TriforceConfig.Notifications
+---@field enabled? boolean Show level up and achievement notifications
+---@field level_up? boolean Show level up notifications
+---@field achievements? boolean Show achievement unlock notifications
+
+---@class TriforceConfig.Keymap
+---@field show_profile? string|nil Keymap for showing profile (default: nil = no keymap)
+
+---@class TriforceConfig
+---@field enabled? boolean Enable the plugin
+---@field gamification_enabled? boolean Enable gamification features (stats, XP, achievements)
+---@field notifications? TriforceConfig.Notifications Notification configuration
+---@field auto_save_interval? number Auto-save stats interval in seconds (default: 300)
+---@field keymap? TriforceConfig.Keymap|nil Keymap configuration
+---@field custom_languages? table<string, TriforceLanguage>|nil Custom language definitions { filetype = { icon = "", name = "" } }
+---@field level_progression? LevelProgression|nil Custom level progression tiers
+---@field xp_rewards? XPRewards|nil Custom XP reward amounts for different actions
+
+---@class Triforce
 local M = {}
+
+---@return boolean
+function M.has_gamification()
+  if not M.config.gamification_enabled then
+    vim.notify('Gamification is not enabled in config', vim.log.levels.WARN)
+    return false
+  end
+
+  return true
+end
 
 ---Default configuration
 ---@type TriforceConfig
@@ -45,14 +64,14 @@ local defaults = {
   },
   custom_languages = nil, -- { rust = { icon = "", name = "Rust" } }
   level_progression = {
-    tier_1 = { min_level = 1, max_level = 10, xp_per_level = 300 },   -- Levels 1-10: 300 XP each
-    tier_2 = { min_level = 11, max_level = 20, xp_per_level = 500 },  -- Levels 11-20: 500 XP each
+    tier_1 = { min_level = 1, max_level = 10, xp_per_level = 300 }, -- Levels 1-10: 300 XP each
+    tier_2 = { min_level = 11, max_level = 20, xp_per_level = 500 }, -- Levels 11-20: 500 XP each
     tier_3 = { min_level = 21, max_level = math.huge, xp_per_level = 1000 }, -- Levels 21+: 1000 XP each
   },
   xp_rewards = {
-    char = 1,   -- XP per character typed
-    line = 1,   -- XP per new line (changed from 10 to 1)
-    save = 50,  -- XP per file save
+    char = 1, -- XP per character typed
+    line = 1, -- XP per new line (changed from 10 to 1)
+    save = 50, -- XP per file save
   },
 }
 
@@ -66,126 +85,109 @@ function M.setup(opts)
 
   -- Apply custom level progression to stats module
   if M.config.level_progression then
-    local stats_module = require('triforce.stats')
-    stats_module.level_config = M.config.level_progression
+    require('triforce.stats').level_config = M.config.level_progression
   end
 
   -- Register custom languages if provided
   if M.config.custom_languages then
-    local languages = require('triforce.languages')
-    languages.register_custom_languages(M.config.custom_languages)
+    require('triforce.languages').register_custom_languages(M.config.custom_languages)
   end
 
   -- Set up keymap if provided
   if M.config.keymap and M.config.keymap.show_profile then
-    vim.keymap.set('n', M.config.keymap.show_profile, function()
-      M.show_profile()
-    end, { desc = 'Show Triforce Profile', silent = true })
+    vim.keymap.set('n', M.config.keymap.show_profile, M.show_profile, {
+      desc = 'Show Triforce Profile',
+      silent = true,
+      noremap = true,
+    })
   end
 
   if M.config.enabled and M.config.gamification_enabled then
-    local tracker = require('triforce.tracker')
-    tracker.setup()
+    require('triforce.tracker').setup()
   end
 end
 
 ---Show profile UI
 function M.show_profile()
-  if not M.config.gamification_enabled then
-    vim.notify('Gamification is not enabled in config', vim.log.levels.WARN)
+  if not M.has_gamification() then
     return
   end
+
   local tracker = require('triforce.tracker')
   if not tracker.current_stats then
     tracker.setup()
   end
 
-  local profile = require('triforce.ui.profile')
-  profile.open()
+  require('triforce.ui.profile').open()
 end
 
----Get current stats
----@return Stats|nil
-function M.get_stats()
-  local tracker = require('triforce.tracker')
-  return tracker.get_stats()
-end
+M.get_stats = require('triforce.tracker').get_stats
 
 ---Reset all stats (useful for testing)
 function M.reset_stats()
-  if not M.config.gamification_enabled then
-    vim.notify('Gamification is disabled', vim.log.levels.WARN)
+  if not M.has_gamification() then
     return
   end
 
-  local tracker = require('triforce.tracker')
-  tracker.reset_stats()
+  require('triforce.tracker').reset_stats()
 end
 
 ---Debug language tracking
 function M.debug_languages()
-  if not M.config.gamification_enabled then
-    vim.notify('Gamification is disabled', vim.log.levels.WARN)
+  if not M.has_gamification() then
     return
   end
 
-  local tracker = require('triforce.tracker')
-  tracker.debug_languages()
+  require('triforce.tracker').debug_languages()
 end
 
 ---Force save stats
 function M.save_stats()
-  if not M.config.gamification_enabled then
-    vim.notify('Gamification is disabled', vim.log.levels.WARN)
+  if not M.has_gamification() then
     return
   end
 
   local tracker = require('triforce.tracker')
-  local stats_module = require('triforce.stats')
+  if not tracker.current_stats then
+    vim.notify('No stats to save', vim.log.levels.WARN)
+    return
+  end
 
   if tracker.current_stats then
-    local ok = stats_module.save(tracker.current_stats)
-    if ok then
+    if require('triforce.stats').save(tracker.current_stats) then
       vim.notify('Stats saved successfully!', vim.log.levels.INFO)
-    else
-      vim.notify('Failed to save stats!', vim.log.levels.ERROR)
+      return
     end
-  else
-    vim.notify('No stats to save', vim.log.levels.WARN)
+
+    vim.notify('Failed to save stats!', vim.log.levels.ERROR)
   end
 end
 
 ---Debug: Show current XP progress
 function M.debug_xp()
-  if not M.config.gamification_enabled then
-    vim.notify('Gamification is disabled', vim.log.levels.WARN)
+  if not M.has_gamification() then
     return
   end
 
-  local tracker = require('triforce.tracker')
-  tracker.debug_xp()
+  require('triforce.tracker').debug_xp()
 end
 
 ---Debug: Test achievement notification
 function M.debug_achievement()
-  if not M.config.gamification_enabled then
-    vim.notify('Gamification is disabled', vim.log.levels.WARN)
+  if not M.has_gamification() then
     return
   end
 
-  local tracker = require('triforce.tracker')
-  tracker.debug_achievement()
+  require('triforce.tracker').debug_achievement()
 end
 
 ---Debug: Fix level/XP mismatch
 function M.debug_fix_level()
-  if not M.config.gamification_enabled then
-    vim.notify('Gamification is disabled', vim.log.levels.WARN)
+  if not M.has_gamification() then
     return
   end
 
-  local tracker = require('triforce.tracker')
-  tracker.debug_fix_level()
+  require('triforce.tracker').debug_fix_level()
 end
 
 return M
