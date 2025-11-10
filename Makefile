@@ -10,8 +10,8 @@ help: ## Show this help message
 test: ## Run tests with busted
 	busted
 
-lint: ## Run luacheck linter
-	luacheck .
+lint: ## Run selene linter
+	selene lua/
 
 format: ## Format code with stylua
 	stylua --check .
@@ -24,4 +24,3 @@ check: lint test ## Run linter and tests
 install-deps: ## Install development dependencies
 	luarocks install --local busted
 	luarocks install --local nlua
-	luarocks install --local luacheck
